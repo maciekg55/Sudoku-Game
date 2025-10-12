@@ -4,3 +4,19 @@ out
 .idea
 .vs
 .vscode
+
+# Ignore build folders
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+# macOS
+.DS_Store
+
+# Temp and binary files
+*.o
+*.obj
+*.exe
+*.out
+*.log
