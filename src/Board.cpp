@@ -30,7 +30,8 @@ Cell& Board::getCellIDFromClick(const sf::Vector2f& mousePos) {
 }
 
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        const sf::Font font("assets/helvetica-light.ttf");
+        const sf::Font normalFont("assets/helvetica-light.ttf");
+        const sf::Font boldFont("assets/helvetica-bold.ttf");
         constexpr sf::Color highlightColor(226, 235, 243);
         constexpr sf::Color selectedColor(187, 222, 251);
         constexpr sf::Color thickOutlineColor(52, 72, 97);
@@ -49,11 +50,26 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
             target.draw(cell, states);
 
-            sf::Text cellIDText(font, std::to_string(c.cellID));
+            sf::Text cellIDText(normalFont, std::to_string(c.cellID));
             cellIDText.setPosition({col * 60.f + 45.f, row * 60.f + 45.f});
             cellIDText.setFillColor(sf::Color::Black);
             cellIDText.setCharacterSize(10);
+
             target.draw(cellIDText, states);
+
+            if (c.occupyingValue != std::nullopt) {
+                sf::Text cellOccupyingValue(c.isSelected ? boldFont : normalFont, std::to_string(c.occupyingValue.value()));
+                cellOccupyingValue.setPosition({
+                    c.isSelected ? (col * 60.f + static_cast<float>(22)) : (col * 60.f + static_cast<float>(22.5)),
+                    (row * 60.f + 10.f)
+                });
+                cellOccupyingValue.setFillColor(sf::Color::Black);
+                cellOccupyingValue.setCharacterSize(c.isSelected ? 35 : 30);
+
+                target.draw(cellOccupyingValue, states);
+            }
+
+
         }
 
         sf::RectangleShape line;
