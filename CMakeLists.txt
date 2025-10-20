@@ -3,9 +3,6 @@ project(CMakeSFMLProject LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Copy assets folder to build directory
-file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/bin)
-
 include(FetchContent)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -25,6 +22,8 @@ add_executable(main src/main.cpp
         src/Utils.cpp
         src/Game.cpp
         include/Game.h
-        Enums.h)
+        Enums.h
+        Generator.cpp
+        Generator.h)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
