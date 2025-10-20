@@ -18,6 +18,7 @@ public:
 
     bool contains(const sf::Vector2f& mousePos) const;
     Cell& getCellIDFromClick(const sf::Vector2f& mousePos);
+    void initialize();
 private:
     sf::Vector2f boardSize{540.f, 540.f};
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

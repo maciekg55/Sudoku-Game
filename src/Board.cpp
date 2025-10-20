@@ -1,5 +1,7 @@
 #include "../include/Board.h"
 
+#include "../SudokuGenerator.h"
+
 ///< Constructor
 Board::Board() {
     createGrid();
@@ -29,6 +31,16 @@ Cell& Board::getCellIDFromClick(const sf::Vector2f& mousePos) {
     return selected;
 }
 
+void Board::initialize() {
+    SudokuGenerator generator;
+    std::array<int, 81> newCells{};
+    generator.emplaceNumber(newCells, 0);
+    for (int i = 0; i<81; i++) {
+        cells[i].rightValue = newCells[i];
+    }
+}
+
+
 void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         const sf::Font normalFont("assets/helvetica-light.ttf");
         const sf::Font boldFont("assets/helvetica-bold.ttf");
@@ -36,6 +48,8 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         constexpr sf::Color selectedColor(187, 222, 251);
         constexpr sf::Color thickOutlineColor(52, 72, 97);
         constexpr sf::Color thinOutlineColor(206, 214, 224);
+
+        constexpr sf::Color gray(222, 219, 213);
 
         states.transform *= getTransform();
 
@@ -52,10 +66,17 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
             sf::Text cellIDText(normalFont, std::to_string(c.cellID));
             cellIDText.setPosition({col * 60.f + 45.f, row * 60.f + 45.f});
-            cellIDText.setFillColor(sf::Color::Black);
+            cellIDText.setFillColor(gray);
             cellIDText.setCharacterSize(10);
 
             target.draw(cellIDText, states);
+
+            sf::Text rightCellValue(normalFont, std::to_string(c.rightValue));
+            rightCellValue.setPosition({col * 60.f + static_cast<float>(22), row * 60.f + 10.f});
+            rightCellValue.setFillColor(sf::Color::Black);
+            rightCellValue.setCharacterSize(35);
+
+            target.draw(rightCellValue, states);
 
             if (c.occupyingValue != std::nullopt) {
                 sf::Text cellOccupyingValue(c.isSelected ? boldFont : normalFont, std::to_string(c.occupyingValue.value()));

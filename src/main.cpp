@@ -1,8 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <sys/_select.h>
-
 #include "Cell.h"
 #include "Board.h"
 #include "Utils.h"
@@ -21,6 +19,8 @@ int main()
     Cell* selectedCell = nullptr;
 
     const std::vector<Cell> cells = board.cells;
+
+    board.initialize();
 
     constexpr sf::Color backgroundColor(235, 237, 239);
 

@@ -13,3 +13,7 @@ enum class NumpadValue{
     Eight = 8,
     Nine = 9
 };
+
+enum GenerationModes {
+    rowGeneration, columnGeneration, blockGeneration
+};
