@@ -22,8 +22,15 @@ add_executable(main src/main.cpp
         src/Utils.cpp
         src/Game.cpp
         include/Game.h
-        Enums.h
-        SudokuGenerator.cpp
-        SudokuGenerator.h)
+        include/Enums.h
+        src/SudokuGenerator.cpp
+        include/SudokuGenerator.h
+        src/InputPanel.cpp
+        include/InputPanel.h
+        include/Constants.h
+        src/Button.cpp
+        include/Button.h
+        src/DataManager.cpp
+        include/DataManager.h)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)

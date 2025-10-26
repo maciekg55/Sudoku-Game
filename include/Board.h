@@ -3,6 +3,9 @@
 #include <vector>
 #include "Cell.h"
 #include "Utils.h"
+#include "SudokuGenerator.h"
+#include "Constants.h"
+
 
 /**
  * @class Board
